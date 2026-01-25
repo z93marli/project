@@ -23,7 +23,7 @@ pipeline {
 
           arduino-cli version
           arduino-cli core update-index
-          arduino-cli compile --fqbn "$FQBN" ./blink.ino
+          arduino-cli compile --fqbn "$FQBN" blink
         '''
       }
     }
