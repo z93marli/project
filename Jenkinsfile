@@ -21,9 +21,25 @@ pipeline {
           pwd
           ls -la
 
-          arduino-cli version
-          arduino-cli core update-index
-          arduino-cli compile --fqbn "$FQBN" blink
+         echo "=== Arduino CLI ==="
+         arduino-cli version
+
+         echo "=== Update index & ensure AVR core ==="
+         arduino-cli core update-index
+         arduino-cli core list | grep -q '^arduino:avr' || arduino-cli core install arduino:avr
+
+         echo "=== Detect board port ==="
+         PORT=$(arduino-cli board list | awk 'NR>1 && $1 ~ /^\\/dev\\// {print $1; exit}')
+         echo "Detected port: $PORT"
+         test -n "$PORT"
+
+         echo "=== Compile ==="
+         arduino-cli compile --fqbn "$FQBN" blink
+
+         echo "=== Upload ==="
+         arduino-cli upload -p "$PORT" --fqbn "$FQBN" blink
+
+         echo "=== DONE ==="
         '''
       }
     }
