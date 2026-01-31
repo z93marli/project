@@ -1,12 +1,15 @@
+#define internal_led 13
+
+
 void setup ()
 {
-   pinMode(13,OUTPUT);  
+   pinMode(internal_led,OUTPUT);  
 }
 
 void loop()
 {
-   digitalWrite(13,HIGH);
-   delay(500);
-   digitalWrite(13,LOW);
-   delay(500);  
+   digitalWrite(internal_led,HIGH);
+   delay(600);
+   digitalWrite(internal_led,LOW);
+   delay(400);  
 }
