@@ -6,18 +6,18 @@
 
 TM1637Display display(CLK, DIO);
 
+int x=0;
+
 void setup ()
 {
    pinMode(internal_led,OUTPUT); 
-   display.setBrightness(3); // Sets the brightness level to 3
+   display.setBrightness(1); // Sets the brightness level to 3
 }
 
 void loop()
 {
-   data[0]= display.encodeDigit(15); // This will display F___ on the display [0b01110001 = F]
-	display.setSegments(data);
-   digitalWrite(internal_led,HIGH);
-   delay(50);
-   digitalWrite(internal_led,LOW);
-   delay(250);  
+   display.showNumberDec(x,0,4,0);
+   delay (1000);
+   x++;
+   //display.clear();
 }
